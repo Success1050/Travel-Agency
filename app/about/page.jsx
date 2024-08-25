@@ -9,7 +9,7 @@ const AboutPage = () => {
           style={{ backgroundImage: "url(/travelBanner.jpg)" }}
         >
           <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center'>
-            <h4 className='text-4xl md:text-6xl font-bold text-white mb-4'>
+            <h4 className='text-4xl md:text-6xl font-bold text-white mb-4 text-center'>
               About Giftnuels travels agency
             </h4>
           </div>

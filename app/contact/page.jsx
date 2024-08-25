@@ -1,19 +1,16 @@
+import HeaderComponent from "@/components/HeaderComponent";
 import { FaEnvelope, FaMapMarkedAlt, FaPhone } from "react-icons/fa";
 
 const ContactPage = () => {
   return (
     <>
       <section className='bg-gray-100'>
-        <div
-          className='relative h-screen bg-cover bg-center'
-          style={{ backgroundImage: "url(/travelBanner.jpg)" }}
-        >
-          <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center'>
-            <h4 className='text-4xl md:text-6xl font-bold text-white mb-4'>
-              Contact Us
-            </h4>
-          </div>
-        </div>
+        <HeaderComponent>
+          <h4 className='text-4xl md:text-6xl font-bold text-white mb-4'>
+            Contact Us
+          </h4>
+        </HeaderComponent>
+
         <div className='container mx-auto px-4 py-12'>
           <div className='grid gap-8 sm:grid-cols-1 md:grid-cols-2'>
             <div className='bg-white rounded-lg shadow-md p-6'>
