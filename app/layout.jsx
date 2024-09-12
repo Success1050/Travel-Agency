@@ -7,14 +7,31 @@ export const metadata = {
   description: "travel website",
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang='en'>
-      <body>
+// export default function RootLayout({ children }) {
+//   return (
+//     <html lang='en'>
+//       <body>
+//         <Navbar />
+//         {children}
+//         <Footer />
+//       </body>
+//     </html>
+//   );
+// }
+
+import React from "react";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+
+const RootLayout = ({ children }) => (
+  <html lang='en'>
+    <body>
+      <AntdRegistry>
         <Navbar />
         {children}
         <Footer />
-      </body>
-    </html>
-  );
-}
+      </AntdRegistry>
+    </body>
+  </html>
+);
+
+export default RootLayout;
