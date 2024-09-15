@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export const metadata = {
   title: "Travel",
@@ -18,9 +19,6 @@ export const metadata = {
 //     </html>
 //   );
 // }
-
-import React from "react";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 const RootLayout = ({ children }) => (
   <html lang='en'>

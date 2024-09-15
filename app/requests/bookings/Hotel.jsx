@@ -2,404 +2,141 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaArrowDown } from "react-icons/fa";
+import BookingLayout from "./Layout";
+import PersonalDetails from "@/RequestComponents/PersonalDetails";
+import { Form, Select, DatePicker, InputNumber, Input, Button } from "antd";
+const { Option } = Select;
+
 const Hotel = () => {
-  const [countries, setCountries] = useState([]);
-
-  const [type, settype] = useState("text");
-  const [type2, settype2] = useState("text");
-  const [isDropdown, setIsdropdown] = useState(false);
-  const [flag, setFlag] = useState("");
-  const [records, setRecords] = useState([]);
-  console.log(records);
-
-  const [code, setCode] = useState("");
-
-  const [details, setDetails] = useState({
-    lastname: "",
-    firstname: "",
-    nationality: "",
-    class: "",
-    company: "",
-    email: "",
-    comment: "",
-    adult: "",
-    child: "",
-    infant: "",
-    phonenumbers: "",
-    from: "",
-    to: "",
-    depDate: "",
-    Airline: "",
-    retDate: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDetails((prev) => ({ ...prev, [name]: value }));
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    console.log(values);
+    form.resetFields();
   };
-
-  const filter = (e) => {
-    setRecords(
-      countries.filter((country) =>
-        country.cca2.toLowerCase().includes(e.target.value.toLowerCase())
-      )
-    );
-  };
-
-  const toggleTypes = () => {
-    settype((prevType) => (prevType === "text" ? "date" : "text"));
-  };
-  const toggleTypes2 = () => {
-    settype2((prevType) => (prevType === "text" ? "date" : "text"));
-  };
-
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await axios("https://restcountries.com/v3.1/all");
-        setCountries(response.data);
-        setRecords(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCountries();
-  }, []);
-
   return (
     <>
-      <form action='#'>
-        <div>
-          <h4 className='mb-3 text-[18px] text-gray-700 font-medium'>
-            Personal details:
-          </h4>
-          <div className='flex flex-col sm:flex-row gap-4 sm:items-center items-start mb-4'>
-            <label
-              htmlFor='Lastname'
-              className='text-gray-700 mb-2 font-medium text-[16px]'
+      <BookingLayout>
+        <Form
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 14,
+          }}
+          onFinish={onFinish}
+          form={form}
+        >
+          <PersonalDetails />
+          <div className='mt-10'>
+            <h2 className='w-full text-center font-semibold text-sm p-4'>
+              Reservations:
+            </h2>
+            <Form.Item
+              label='Hotel'
+              name='hotel'
+              rules={[
+                {
+                  required: true,
+                  message: "Please select!",
+                },
+              ]}
             >
-              Lastname:
-            </label>
-            <input
-              type='text'
-              name='lastname'
-              value={details.lastName}
-              className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-              placeholder='Enter your Lastname'
-              onChange={handleChange}
-            />
-          </div>
-          <div className='flex flex-col sm:flex-row gap-4  mb-4 sm:items-center items-start'>
-            <label
-              htmlFor='firstname'
-              className='text-gray-700 mb-2 font-medium text-[16px]'
-            >
-              Firstname:
-            </label>
-            <input
-              type='text'
-              name='firstname'
-              value={details.firstName}
-              onChange={handleChange}
-              className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-              placeholder='Enter your Firstname'
-            />
-          </div>
-          <div className='flex flex-col sm:flex-row gap-4  mb-4 sm:items-center items-start'>
-            <label htmlFor='Nationality'>Nationality:</label>
-            <select
-              name='nationality'
-              value={details.nationality}
-              className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-            >
-              {countries.map((country) => {
-                return (
-                  <option key={country.cca2} value={country.name.common}>
-                    {country.name.common}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div className='flex flex-col sm:flex-row gap-4 sm:items-center items-start mb-4'>
-            <label
-              htmlFor='Company'
-              className='text-gray-700 mb-2 font-medium text-[16px]'
-            >
-              Company:
-            </label>
-            <input
-              type='text'
-              name='company'
-              onChange={handleChange}
-              className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-              placeholder='Enter your Company'
-            />
-          </div>
-          <div className='flex flex-col sm:flex-row gap-4 sm:items-center items-start mb-4'>
-            <label
-              htmlFor='Email'
-              className='text-gray-700 mb-2 font-medium text-[16px]'
-            >
-              Email:
-            </label>
-            <input
-              type='email'
-              name='email'
-              value={details.email}
-              onChange={handleChange}
-              className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-              placeholder='Enter your Email'
-            />
-          </div>
-          <div className='flex flex-col sm:flex-row gap-4 sm:items-center items-start mb-4'>
-            <label
-              htmlFor='Phonenumber'
-              className='text-gray-700 mb-2 font-medium text-[16px]'
-            >
-              Phonenumber:
-            </label>
-            <div className='flex justify-between items-center w-full relative'>
-              <div className='flex flex-row justify-center items-center'>
-                <div
-                  className='flex justify-between items-center p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in cursor-pointer'
-                  onClick={() => setIsdropdown(!isDropdown)}
-                >
-                  {flag ? <h2>{flag}</h2> : "🚩"}
+              <Select placeholder='Hotels'>
+                <Option value='3 Star'>3 Star</Option>
+                <Option value='4 Star'>4 Star</Option>
+                <Option value='5 Star'>5 Star</Option>
+                <Option value='others'>
+                  Others(please specify in message box below)
+                </Option>
+              </Select>
+            </Form.Item>
 
-                  <FaArrowDown />
-                </div>
-
-                {isDropdown && (
-                  <div className='dropdown'>
-                    <input
-                      type='text'
-                      className='sticky top-0 '
-                      onChange={filter}
-                    />
-                    {records.map((record) => {
-                      console.log(record);
-
-                      return (
-                        <div
-                          className='flex flex-row justify-between gap-4 items-center cursor-pointer'
-                          onClick={() => {
-                            setFlag(
-                              <img
-                                src={record.flags.svg}
-                                alt={record.cca2}
-                                className='w-[30px]'
-                              />
-                            );
-                            setIsdropdown(false);
-                            setCode("+" + record.ccn3);
-                          }}
-                          key={record.cca2}
-                        >
-                          <img
-                            src={record.flags.svg}
-                            alt={record.cca2}
-                            className='w-[40px]'
-                          />
-                          <h2>{record.cca3.toLowerCase()}</h2>
-
-                          <p>
-                            {record.idd.root
-                              ? `${record.idd.root}${record.idd.suffixes[0]}`
-                              : "N/A"}
-                          </p>
-                        </div>
-                      );
-                    })}
-
-                    {/* <div className='flex flex-row justify-between gap-4 items-center'>
-                            <h2 className='w-[10%] bg-red-500'>🚩</h2>
-                            <h2>+234</h2>
-                          </div>
-                          <div className='flex flex-row justify-between gap-4 items-center'>
-                            <h2 className='w-[10%] bg-red-500'>🚩</h2>
-                            <h2>+234</h2>
-                          </div> */}
-                  </div>
-                )}
-              </div>
-              <input
-                type='tel'
-                name='phonenumbers'
-                value={details.phonenumbers}
-                onChange={handleChange}
-                className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-                placeholder={`${code}`}
-              />
-            </div>
-          </div>
-        </div>
-        <div className='mt-10'>
-          <h4 className='mb-3 text-[18px] text-gray-700 font-medium'>
-            Itinerary details:
-          </h4>
-          <div className='flex flex-col sm:flex-row gap-4  mb-4 sm:items-center items-start'>
-            <label
-              htmlFor='class'
-              className='text-gray-700 mb-2 font-medium text-[16px]'
+            <Form.Item
+              label='Check-in Date'
+              name='checkin'
+              rules={[
+                {
+                  required: true,
+                  message: "Please Date!",
+                },
+              ]}
             >
-              Class:
-            </label>
-            <select
-              name='class'
-              value={details.class}
-              onChange={handleChange}
-              className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
+              <DatePicker className='w-full' />
+            </Form.Item>
+            <Form.Item
+              label='Check-out Date'
+              name='checkout'
+              rules={[
+                {
+                  required: true,
+                  message: "Please Date!",
+                },
+              ]}
             >
-              <option value='Economy class'>Economy class</option>
-              <option value='Business class'>Business class</option>
-              <option value='Premium Economy'>Premium Economy</option>
-            </select>
-          </div>
-          <div className='flex flex-col sm:flex-row gap-4 items-start mb-4'>
-            <label
-              htmlFor='Schedules'
-              className='text-gray-700 my-2 font-bold text-[18px]'
+              <DatePicker className='w-full' />
+            </Form.Item>
+
+            <Form.Item
+              label='Nos. of Adults (Age 12+)'
+              name='adult'
+              rules={[
+                {
+                  required: true,
+                  message: "Please age!",
+                },
+              ]}
             >
-              Schedules:
-            </label>
-
-            <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
-              <input
-                type='text'
-                name='from'
-                value={details.from}
-                onChange={handleChange}
-                placeholder='Fly From'
-                className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-              />
-
-              <input
-                type='text'
-                name='to'
-                value={details.to}
-                onChange={handleChange}
-                placeholder='Fly To'
-                className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-              />
-
-              <input
-                type={type}
-                value={details.depDate}
-                name='depDate'
-                placeholder='Depature date'
-                onChange={handleChange}
-                className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-                onFocus={toggleTypes}
-              />
-
-              <input
-                type={type2}
-                name='retDate'
-                value={details.retDate}
-                onChange={handleChange}
-                placeholder='Arrival Date'
-                className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-                onFocus={toggleTypes2}
-              />
-            </div>
-          </div>
-          <div
-            className='flex
-                  flex-col
-                  sm:flex-row
-                  gap-4
-                  mb-4
-                  sm:items-center
-                  items-start'
-          >
-            <label
-              htmlFor='Airlines'
-              className='text-gray-700 my-2 font-bold text-[18px] w-[20%]'
+              <InputNumber />
+            </Form.Item>
+            <Form.Item
+              label='Nos. of Children (Age 2 - 11)'
+              name='children'
+              rules={[
+                {
+                  required: true,
+                  message: "Please age!",
+                },
+              ]}
             >
-              Prefered airline:
-            </label>
-            <input
-              type='text'
-              name='Airline'
-              value={details.Airline}
-              onChange={handleChange}
-              placeholder='specify your prefered airline'
-              className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-            />
-          </div>
-          <div className='flex flex-col sm:flex-row gap-4 sm:items-center items-start mb-4'>
-            <label
-              htmlFor='passengers'
-              className='text-gray-700 my-2 font-bold text-[18px]'
+              <InputNumber />
+            </Form.Item>
+            <Form.Item
+              label='Nos. of infants (Age under 2)'
+              name='infant'
+              rules={[
+                {
+                  required: true,
+                  message: "Please age!",
+                },
+              ]}
             >
-              No. of passengers
-            </label>
-            <table className='table-auto'>
-              <thead>
-                <tr>
-                  <th>Adult(Age 12+)</th>
-                  <th>Children(2-11)</th>
-                  <th>Infant(Under 2)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <input
-                      type='number'
-                      name='adult'
-                      value={details.adult}
-                      onChange={handleChange}
-                      placeholder='no. of Adults'
-                      className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type='number'
-                      name='child'
-                      onChange={handleChange}
-                      value={details.child}
-                      placeholder='no. of children'
-                      className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type='number'
-                      name='infant'
-                      value={details.infant}
-                      onChange={handleChange}
-                      placeholder='no. of infant'
-                      className='w-full p-2 border-[1px] border-gray-300 rounded focus:border-gray-700 transition-all duration-300 ease-in'
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+              <InputNumber />
+            </Form.Item>
+            <Form.Item
+              label='TextArea'
+              name='TextArea'
+              rules={[
+                {
+                  required: true,
+                  message: "Please input!",
+                },
+              ]}
+            >
+              <Input.TextArea />
+            </Form.Item>
+
+            <Form.Item
+              wrapperCol={{
+                span: 24,
+              }}
+            >
+              <Button type='primary' className='mb-4' block htmlType='submit'>
+                Submit
+              </Button>
+            </Form.Item>
           </div>
-          <div
-            className='flex
-                  flex-col
-                  sm:flex-row
-                  gap-4
-                  mb-4
-                  sm:items-center
-                  items-start'
-          >
-            <label htmlFor='comments'>Additional Comments</label>
-            <textarea
-              name='comment'
-              onChange={handleChange}
-              value={details.comment}
-              rows={7}
-              placeholder='Write Message'
-              className='w-full p-2 border border-gray-300 rounded resize-none'
-            ></textarea>
-          </div>
-        </div>
-      </form>
+        </Form>
+      </BookingLayout>
     </>
   );
 };

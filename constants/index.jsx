@@ -108,3 +108,43 @@ export const testimonials = [
     desc: "This agency has been very deligent in executing their job. They have always given me good fares and prices.",
   },
 ];
+
+export const airlines = [
+  "American Airlines",
+  "Airfrance",
+  "Asky",
+  "British Airline",
+  "Ethiopian Airline",
+  "Royal air Maroc",
+  "Turkish Airline",
+  "United Airlines",
+  "Delta Airline",
+  "KLM",
+  "Emirates",
+  "Kenya Airways",
+  "China Southern",
+  "Egypt Air",
+  "Hahn Air",
+  "IRS airline",
+  "Lufthansa",
+  "Camair",
+  "Qatar airlines",
+  "Rwandair",
+  "Virgin atlantic",
+  "South African Airways",
+  "Etihad",
+  "Others",
+];
+
+export const tourPurpose = [
+  "An Adventure",
+  "An Anniversary",
+  "A culture and history trip",
+  "A custom and private trip",
+  "Events",
+  "An excursion",
+  "Festive trip",
+  "Honeymoon",
+  "A vacation",
+  "Others (please specify in the comments below)",
+];
