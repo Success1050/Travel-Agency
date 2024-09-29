@@ -33,7 +33,16 @@ const Tours = () => {
             <h2 className='w-full text-center font-semibold text-sm p-4'>
               Itenary:
             </h2>
-            <Form.Item label='Tour type' name='TourType'>
+            <Form.Item
+              label='Tour type'
+              name='TourType'
+              rules={[
+                {
+                  required: true,
+                  message: "Please specify!",
+                },
+              ]}
+            >
               <Select placeholder='Tour Type'>
                 <Option value='Independent'>Independent Tour</Option>
                 <Option value='Guided'>Guided Tour</Option>
@@ -41,7 +50,16 @@ const Tours = () => {
               </Select>
             </Form.Item>
 
-            <Form.Item label='I would like' name='wouldLike'>
+            <Form.Item
+              label='I would like'
+              name='wouldLike'
+              rules={[
+                {
+                  required: true,
+                  message: "Please specify!",
+                },
+              ]}
+            >
               <Select placeholder='Purpose of Tour'>
                 <Option value='receiveOffers'>
                   To receive offers on tours

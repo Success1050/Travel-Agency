@@ -61,6 +61,45 @@ export const services = [
   },
 ];
 
+export const mainServices = [
+  {
+    id: 1,
+    img: "/visa-img.jfif",
+    name: "Visa Processing",
+    desc: "Giftnuels travel agency helps you with an easy visa processing with an affordable price.",
+  },
+  {
+    id: 2,
+    img: "/planeimg.jfif",
+    name: "Flight Reservation",
+    desc: "Giftnuels travel agency offers a cheap flight ticket and a reliable airline to any country you want to travel to.",
+  },
+  {
+    id: 3,
+    img: "/hotelimg.jpeg",
+    name: "Hotel Reservation",
+    desc: "Giftnuels travel agency can get you one of the best hotels with good security, conducive environment and an affordable price in any country you want.",
+  },
+  {
+    id: 4,
+    img: "/beachimg.jfif",
+    name: "Vacation Packages",
+    desc: "Giftnuels travel agency can organize a vacation package for you in any country of your choice at a cheap.",
+  },
+  {
+    id: 5,
+    img: "/pickupimg.jfif",
+    name: "Hotel/Airport Pickup",
+    desc: "Giftnuels travel agency can arrange a standard pickup with a competent driver to come pick you up at any hotel you are.",
+  },
+  {
+    id: 6,
+    img: "/consultationimg.jfif",
+    name: "General Consultation",
+    desc: "Giftnuels travel agency is open to any consultation, enquires or advice regarding our services",
+  },
+];
+
 export const cities = [
   {
     id: 1,
