@@ -1,5 +1,6 @@
 import { cities, services, testimonials } from "@/constants";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -62,12 +63,14 @@ export default function Home() {
               Our Services
             </h3>
 
-            <button
-              className='w-fit p-4 rounded-[6px] text-white bg-blue-500 border-[1px] border-blue-500 border-solid text-center sm:mb-0 mb-3 transform transition-all duration-300 active:scale-[0.9]'
-              type='submit'
-            >
-              View All
-            </button>
+            <Link href='/services'>
+              <button
+                className='w-fit p-4 rounded-[6px] text-white bg-blue-500 border-[1px] border-blue-500 border-solid text-center sm:mb-0 mb-3 transform transition-all duration-300 active:scale-[0.9]'
+                type='submit'
+              >
+                View All
+              </button>
+            </Link>
           </div>
 
           <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
